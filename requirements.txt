@@ -1,1 +1,2 @@
 chardet==4.0.0
+tabulate==0.8.9
