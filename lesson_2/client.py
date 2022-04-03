@@ -6,12 +6,13 @@ import argparse
 import logging
 from decorators import log
 import threading
+from metaclasses import ClientVerifier
 from log.client_log_config import client_logger
 
 logger = logging.getLogger('client_logger')
 
 
-class Client:
+class Client(metaclass=ClientVerifier):
     def __init__(self, account_name):
         self.account_name = account_name
         self.status = 'online'
@@ -112,7 +113,7 @@ def main():
     Отправляет presence сообщение на сервер
     Работает позиционными аргументами из командной строки:
     -address - ip адрес сервера, обязательный аргумент
-    -port - порт сервера, стандартное значние: 8888
+    -port - порт сервера, стандартное значние: 7777
     -u --user опциональный аргумент, имя пользователя,
                                      стандартное значние: Guest
 
@@ -121,7 +122,7 @@ def main():
                                                  ' сообщения и чтения ответа')
     parser.add_argument('address', type=str, help='ip адрес сервера')
     parser.add_argument('port', type=int, help='порт сервера', nargs='?',
-                        default=8888)
+                        default=7777)
     parser.add_argument('-u', '--user', type=str, help='имя пользователя',
                         nargs='?', default='Guest')
     args = parser.parse_args()

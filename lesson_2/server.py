@@ -7,14 +7,17 @@ from common.utils import send_message, read_message
 from common.variables import MAX_CONNECTIONS, MAX_LENGTH
 import logging
 from decorators import log
+from metaclasses import ServerVerifier
+from descriptors import Port
 from log.server_log_config import server_logger
 
 logger = logging.getLogger('server_logger')
 
 
-class Server:
-    def __init__(self, listen_address, listen_port):
+class Server(metaclass=ServerVerifier):
+    port = Port()
 
+    def __init__(self, listen_address, listen_port):
         self.addr = listen_address
         self.port = listen_port
 
@@ -131,7 +134,7 @@ def main():
     """
     Запускает работу сервера с аргументами из командной строки:
     -a --address - ip адрес сервера, дефолтное значние: 127.0.0.1
-    -p --port - порт для прослушивания, дефолтное значние: 8888
+    -p --port - порт для прослушивания, дефолтное значние: 7777
     Сервер читает полученное сообщение и отправляет ответ
     """
     parser = argparse.ArgumentParser(description='Скрипт для получения'
@@ -139,7 +142,7 @@ def main():
     parser.add_argument('-a', '--address',  type=str, help='ip адрес сервера',
                         default='127.0.0.1')
     parser.add_argument('-p', '--port', type=int, help='порт сервера',
-                        default=8888)
+                        default=7777)
     args = parser.parse_args()
     if not check_ip_port(args.address, args.port):
         logger.error(f'Сервер {args.address}:{args.port} не удалось запустить')
