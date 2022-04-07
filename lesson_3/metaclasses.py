@@ -35,7 +35,6 @@ class ClientVerifier(type):
                 pass
             else:
                 for i in ret:
-                    print(i)
                     if i.opname == 'LOAD_METHOD' and i.argval in ['accept',
                                                                   'listen']:
                         raise TypeError(
