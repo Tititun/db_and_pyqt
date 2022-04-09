@@ -9,6 +9,7 @@ import logging
 from decorators import log
 from metaclasses import ServerVerifier
 from descriptors import Port
+from server_database import ServerStorage
 from log.server_log_config import server_logger
 
 logger = logging.getLogger('server_logger')
@@ -17,7 +18,7 @@ logger = logging.getLogger('server_logger')
 class Server(metaclass=ServerVerifier):
     port = Port()
 
-    def __init__(self, listen_address, listen_port):
+    def __init__(self, listen_address, listen_port, db):
         self.addr = listen_address
         self.port = listen_port
 
@@ -26,6 +27,7 @@ class Server(metaclass=ServerVerifier):
         self.users = {}
 
         self.socket = self.init_socket()
+        self.db = db
 
     def init_socket(self) -> socket.socket:
         logger.debug(f'Сервер запущен с параметрами: ip - {self.addr}'
@@ -74,6 +76,7 @@ class Server(metaclass=ServerVerifier):
 
             # если сообщения есть, то отправляем их слушающим пользователям:
             logger.info(f'{len(listeners)} пользователей ожидают сообщения')
+            print(self.db.active_users_list())
             for listener in listeners:
                 try:
                     for message in messages:
@@ -100,6 +103,8 @@ class Server(metaclass=ServerVerifier):
                 response[
                     'message'] = f'Пользователь {user} присоединился к чату'
                 self.users[user] = socket_
+                client_ip, client_port = socket_.getpeername()
+                self.db.user_login(user, client_ip, client_port)
             elif action == 'message':
                 response['from'] = user
                 response['message'] = message.get('message')
@@ -113,6 +118,7 @@ class Server(metaclass=ServerVerifier):
         удаляет пользователя из списка активных пользователей
         """
         for name, socket_ in self.users.items():
+            self.db.user_logout(name)
             if socket_ == user:
                 del self.users[name]
                 break
@@ -148,7 +154,8 @@ def main():
         logger.error(f'Сервер {args.address}:{args.port} не удалось запустить')
         return
 
-    server = Server(args.address, args.port)
+    db = ServerStorage()
+    server = Server(args.address, args.port, db)
     server.start_loop()
 
 
