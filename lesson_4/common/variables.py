@@ -4,5 +4,3 @@ ENCODING = 'utf-8'
 MAX_CONNECTIONS = 5
 # Максимальная длина получаемого сообщения
 MAX_LENGTH = 1024
-# база данных сервера
-SERVER_DATABASE = 'sqlite:///server_database.db3'

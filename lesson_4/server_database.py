@@ -1,8 +1,9 @@
 from sqlalchemy import (create_engine, Column, Integer, String,
                         ForeignKey, DateTime, UniqueConstraint)
 from sqlalchemy.orm import sessionmaker, declarative_base
-from common.variables import SERVER_DATABASE
 import datetime
+import configparser
+from sqlalchemy import func
 
 Base = declarative_base()
 
@@ -44,17 +45,19 @@ class ServerStorage:
         __tablename__ = 'contact_list'
 
         id = Column('id', Integer, primary_key=True)
-        owner_id = Column('owner_id', ForeignKey('User.id'))
-        contact_id = Column('contact_id', ForeignKey('User.id'))
+        owner_id = Column('owner_id', ForeignKey('users.id'))
+        contact_id = Column('contact_id', ForeignKey('users.id'))
 
         UniqueConstraint('owner_id', 'contact_id',
                          name='contacts_unique_constraint')
 
-    def __init__(self):
-
-        self.database_engine = create_engine(SERVER_DATABASE,
+    def __init__(self, db_file):
+        db_file = f'sqlite:///{db_file}'
+        self.database_engine = create_engine(db_file,
                                              echo=False,
-                                             pool_recycle=60 * 60 * 2)
+                                             pool_recycle=60 * 60 * 2,
+                                             connect_args={
+                                                 "check_same_thread": False})
 
         self.metadata = Base.metadata
         self.metadata.create_all(self.database_engine)
@@ -62,6 +65,7 @@ class ServerStorage:
         Session = sessionmaker(bind=self.database_engine)
         self.session = Session()
         self.session.query(self.ActiveUser).delete()
+        self.session.query(self.ContactList).delete()
         self.session.commit()
 
     def user_login(self, username, ip_address, port):
@@ -126,16 +130,46 @@ class ServerStorage:
             query = query.filter(self.User.name == username)
         return query.all()
 
-    def create_contact(self, owner_id, contact_id):
-        new_contact = self.ContactList(owner_id, contact_id)
+    def create_contact(self, owner, contact):
+        owner_id = self.session.query(self.User.id)\
+            .filter(self.User.name == owner).scalar()
+        contact_id = self.session.query(self.User.id) \
+            .filter(self.User.name == contact).scalar()
+        new_contact = self.ContactList(owner_id=owner_id, contact_id=contact_id)
         self.session.add(new_contact)
         self.session.commit()
 
+    def delete_contact(self, owner, contact):
+        owner_id = self.session.query(self.User.id)\
+            .filter(self.User.name == owner).scalar()
+        contact_id = self.session.query(self.User.id) \
+            .filter(self.User.name == contact).scalar()
+        self.session.query(self.ContactList).\
+            filter(self.ContactList.owner_id==owner_id,
+                   self.ContactList.contact_id==contact_id).delete()
+
+    def list_contacts(self, name):
+        owner_id = self.session.query(self.User.id).filter(self.User.name == name).scalar()
+
+        friends_list = self.session.query(self.User.name).\
+            filter(self.ContactList.owner_id == owner_id).\
+            filter(self.User.id == self.ContactList.contact_id).all()
+
+        return [f[0] for f in friends_list] if friends_list else []
+
+    def contacts_stats(self):
+        return self.session.query(self.User.name, self.User.last_login).all()
+
 
 if __name__ == '__main__':
-    test_db = ServerStorage()
+    config = configparser.ConfigParser()
+    config.read('server.ini')
+    db_file = config['SETTINGS']['database_file']
+
+    test_db = ServerStorage(db_file)
     test_db.user_login('Иван', '192.168.1.100', 10000)
     test_db.user_login('Марья', '192.168.1.101', 10001)
+    test_db.user_login('Дима', '192.168.1.100', 10000)
 
     print('Активные пользователи:')
     print(test_db.active_users_list(), end='\n\n')
@@ -149,3 +183,22 @@ if __name__ == '__main__':
 
     print('Все пользователи:')
     print(test_db.users_list(), end='\n\n')
+
+    test_db.create_contact('Иван', 'Марья')
+    test_db.create_contact('Иван', 'Дима')
+
+    test_db.create_contact('Марья', 'Дима')
+    test_db.create_contact('Марья', 'Иван')
+
+    print('Контакты Ивана:')
+    print(test_db.list_contacts('Иван'), end='\n\n')
+
+    print('Удаляем Диму из контактов Ивана')
+    test_db.delete_contact('Иван', 'Дима')
+
+    print('Контакты Ивана:')
+    print(test_db.list_contacts('Иван'), end='\n\n')
+
+    print(test_db.contacts_stats())
+
+    test_db.session.close()

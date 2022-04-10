@@ -2,20 +2,26 @@ import select
 import socket
 import re
 import argparse
+import sys
+import threading
 import time
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QApplication
 from common.utils import send_message, read_message
-from common.variables import MAX_CONNECTIONS, MAX_LENGTH
+from common.variables import MAX_LENGTH
 import logging
 from decorators import log
 from metaclasses import ServerVerifier
 from descriptors import Port
 from server_database import ServerStorage
+import configparser
 from log.server_log_config import server_logger
+from server_gui import MainWindow
 
 logger = logging.getLogger('server_logger')
+stop_server = False
 
-
-class Server(metaclass=ServerVerifier):
+class Server(threading.Thread, metaclass=ServerVerifier):
     port = Port()
 
     def __init__(self, listen_address, listen_port, db):
@@ -28,6 +34,7 @@ class Server(metaclass=ServerVerifier):
 
         self.socket = self.init_socket()
         self.db = db
+        super().__init__()
 
     def init_socket(self) -> socket.socket:
         logger.debug(f'Сервер запущен с параметрами: ip - {self.addr}'
@@ -37,7 +44,9 @@ class Server(metaclass=ServerVerifier):
         s.settimeout(1)
         return s
 
-    def start_loop(self):
+    def run(self):
+        global stop_server
+
         self.socket.listen()
         while True:
             try:
@@ -59,24 +68,19 @@ class Server(metaclass=ServerVerifier):
 
             logger.info(f'Получено {len(recieved)} сообщений')
             messages = []  # собираем все полученные сообщения
-            print('Пользователи:', self.users)
 
             if recieved:
                 for rec in recieved:
                     try:
                         message = rec.recv(MAX_LENGTH)
                         if message == b'':
-                            raise Exception
+                            continue
                         if msg := self.process_message(message, rec):
                             messages.append(msg)
                     except:
-                        self.delete_user(rec)
-                        if rec in self.clients:
-                            self.clients.remove(rec)
+                        pass
 
             # если сообщения есть, то отправляем их слушающим пользователям:
-            logger.info(f'{len(listeners)} пользователей ожидают сообщения')
-            print(self.db.active_users_list())
             for listener in listeners:
                 try:
                     for message in messages:
@@ -90,6 +94,10 @@ class Server(metaclass=ServerVerifier):
                     self.delete_user(listener)
                     self.clients.remove(listener)
 
+            if stop_server:
+                self.db.session.close()
+                break
+
     def process_message(self, rec, socket_):
         """
         функция обрабатывает сообщение формирует ответ
@@ -100,16 +108,40 @@ class Server(metaclass=ServerVerifier):
             action = message.get('action')
             user = message.get('user', {}).get('account_name', 'Guest')
             if action == 'presence':
-                response[
-                    'message'] = f'Пользователь {user} присоединился к чату'
+                response['message'] = \
+                    f'Пользователь {user} присоединился к чату'
                 self.users[user] = socket_
                 client_ip, client_port = socket_.getpeername()
                 self.db.user_login(user, client_ip, client_port)
+                response['status'] = 200
             elif action == 'message':
                 response['from'] = user
                 response['message'] = message.get('message')
                 response['to'] = message.get('to')
-            response['status'] = 200
+                response['status'] = 200
+            elif action == 'get_contacts':
+                response['alert'] = self.db.list_contacts(user)
+                response['status'] = 202
+                response['to'] = user
+            elif action == 'add_contact':
+                name = message.get('user_id')
+                response['to'] = user
+                if name in self.db.user_list():
+                    self.db.create_contact(user, name)
+                    response['status'] = 201
+                else:
+                    response['status'] = 400
+                    response['alert'] = f'Пользователь с именем {name}' \
+                                        f' не обнаружен'
+            elif action == 'del_contact':
+                name = message.get('user_id')
+                self.db.delete_contact(user, name)
+                response['status'] = 201
+                response['to'] = user
+            elif action == 'exit':
+                self.delete_user(socket_)
+                if rec in self.clients:
+                    self.clients.remove(rec)
             response['time'] = time.time()
         return response
 
@@ -118,8 +150,8 @@ class Server(metaclass=ServerVerifier):
         удаляет пользователя из списка активных пользователей
         """
         for name, socket_ in self.users.items():
-            self.db.user_logout(name)
-            if socket_ == user:
+            if user == socket_:
+                self.db.user_logout(name)
                 del self.users[name]
                 break
 
@@ -137,12 +169,17 @@ def check_ip_port(ip, port):
 
 
 def main():
+    global stop_server
     """
     Запускает работу сервера с аргументами из командной строки:
     -a --address - ip адрес сервера, дефолтное значние: 127.0.0.1
     -p --port - порт для прослушивания, дефолтное значние: 7777
     Сервер читает полученное сообщение и отправляет ответ
     """
+
+    config = configparser.ConfigParser()
+    config.read('server.ini')
+
     parser = argparse.ArgumentParser(description='Скрипт для получения'
                                                  'presence сообщений')
     parser.add_argument('-a', '--address',  type=str, help='ip адрес сервера',
@@ -154,10 +191,30 @@ def main():
         logger.error(f'Сервер {args.address}:{args.port} не удалось запустить')
         return
 
-    db = ServerStorage()
-    server = Server(args.address, args.port, db)
-    server.start_loop()
+    db_file = config['SETTINGS']['Database_file']
+    db = ServerStorage(db_file)
 
+    server_app = QApplication(sys.argv)
+    server = Server(args.address, args.port, db)
+    server.start()
+
+    mw = MainWindow()
+    mw.statusBar().showMessage('Server is working')
+
+    def update_list():
+        mw.load_clients(db)
+
+    update_list()
+
+    timer = QTimer()
+    timer.timeout.connect(update_list)
+    timer.start(1000)
+
+    mw.show_history_button.triggered.connect(lambda: mw.show_statistics(db))
+    mw.config_btn.triggered.connect(lambda: mw.show_config_window(config))
+
+    server_app.exec_()
+    stop_server = True
 
 if __name__ == '__main__':
     main()

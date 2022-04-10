@@ -1,3 +1,4 @@
+import datetime
 import socket
 from common.variables import MAX_LENGTH
 from common.utils import send_message, read_message
@@ -7,6 +8,7 @@ import logging
 from decorators import log
 import threading
 from metaclasses import ClientVerifier
+from client_database import ClientStorage
 from log.client_log_config import client_logger
 
 logger = logging.getLogger('client_logger')
@@ -14,6 +16,7 @@ logger = logging.getLogger('client_logger')
 
 class Client(metaclass=ClientVerifier):
     def __init__(self, account_name):
+        self.db = ClientStorage(user=account_name)
         self.account_name = account_name
         self.status = 'online'
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,10 +53,23 @@ class Client(metaclass=ClientVerifier):
         else:
             return False
 
-    @staticmethod
-    def parse_message(msg):
+    def parse_message(self, msg):
+        if msg.get('status') == 202:
+            content = msg.get('alert')
+            if isinstance(content, list):
+                for name in content:
+                    self.db.add_contact(name)
+            return msg['alert']
+
+        elif msg.get('status') == 201:
+            return 'Запрос выполнен'
+
+        elif msg.get('status') == 400:
+            return f'Ошибка запроса: {msg.get("alert", "что-то не то")}'
         from_ = msg.get('from', 'Чат-бот')
         message = msg.get('message')
+        self.db.write_message(from_, self.account_name, message, datetime.
+                              datetime.fromtimestamp(msg['time']))
         return f'{from_}: {message}'
 
     def run(self):
@@ -89,19 +105,57 @@ class Client(metaclass=ClientVerifier):
             """
             print(f'Добро пожаловать в чат. Для выхода нажмите Ctrl + C')
             while True:
-                to = input('Введите получателя:\n')
-                message_text = input('Введите текст сообщения:\n')
+                action = {}
+                cmd = input('Команды:\n'
+                            '"msg" - отправить сообщение\n'
+                            '"add" - добавить контакт\n'
+                            '"del" - удалить контакт\n'
+                            '"list" - получить список контактов\n'
+                            '"exit" - выход\n')
+                print('COMMAND', cmd)
+                if cmd == 'msg':
+                    to = input('Введите получателя:\n')
+                    message_text = input('Введите текст сообщения:\n')
+                    action = {
+                        'action': 'message',
+                        'message': message_text,
+                        'to': to,
+                    }
+                    self.db.write_message(self.account_name, to,
+                                          message_text,
+                                          datetime.datetime.
+                                          fromtimestamp(time.time()))
+                elif cmd == 'add':
+                    name = input('Введите имя контакта для добавления:\n')
+                    action = {
+                        'action': 'add_contact',
+                        'user_id': name
+                    }
+                elif cmd == 'del':
+                    name = input('Введите имя контакта для удаления:\n')
+                    action = {
+                        'action': 'del_contact',
+                        'user_id': name
+                    }
+                elif cmd == 'list':
+                    action = {
+                        'action': 'get_contacts',
+                    }
+                    print(action)
+                elif cmd == 'exit':
+                    action = {'action': 'exit'}
                 message = {
-                    'action': 'message',
+                    **action,
                     'time': time.time(),
-                    'message': message_text,
-                    'to': to,
                     'user': {
                         'account_name': self.account_name,
                         'status': 'online'
                     }
                 }
+                print(message)
                 send_message(self.sock, message)
+                if action['action'] == 'exit':
+                    break
 
         self.send_thread = threading.Thread(target=user_thread)
         self.send_thread.daemon = True
@@ -133,8 +187,15 @@ def main():
     client = Client(args.user)
     connection_success = client.connect(args.address, args.port)
     if connection_success:
-        client.create_presence()
-        client.run()
+        try:
+            client.create_presence()
+            client.run()
+        except:
+            send_message(client.sock,
+                         {
+                            'action': 'exit',
+                            'time': time.time()}
+                         )
 
 
 if __name__ == '__main__':
