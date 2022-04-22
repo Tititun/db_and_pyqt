@@ -17,6 +17,7 @@ from server_database import ServerStorage
 import configparser
 from log.server_log_config import server_logger
 from server_gui import MainWindow
+import sqlalchemy
 
 logger = logging.getLogger('server_logger')
 stop_server = False
@@ -66,7 +67,7 @@ class Server(threading.Thread, metaclass=ServerVerifier):
             except:
                 continue
 
-            logger.info(f'Получено {len(recieved)} сообщений')
+            # logger.info(f'Получено {len(recieved)} сообщений')
             messages = []  # собираем все полученные сообщения
 
             if recieved:
@@ -80,6 +81,16 @@ class Server(threading.Thread, metaclass=ServerVerifier):
                     except:
                         pass
 
+            all_users = [u[0] for u in self.db.users_list()]
+
+            for listener in self.users:
+                messages.append({
+                    'to': listener,
+                    'time': time.time(),
+                    'status': 200,
+                    'message': all_users,
+                    'from': 'user_list'
+                })
             # если сообщения есть, то отправляем их слушающим пользователям:
             for listener in listeners:
                 try:
@@ -87,7 +98,7 @@ class Server(threading.Thread, metaclass=ServerVerifier):
                         to = message.get('to')
                         if to and self.users.get(to) != listener:
                             continue
-                        logger.info(f'Отправляется сообщение {message}')
+                        # logger.info(f'Отправляется сообщение {message}')
                         send_message(listener, message)
                 except:
                     # клиент отсоединился
@@ -126,7 +137,8 @@ class Server(threading.Thread, metaclass=ServerVerifier):
             elif action == 'add_contact':
                 name = message.get('user_id')
                 response['to'] = user
-                if name in self.db.user_list():
+                print([u[0] for u in self.db.users_list()])
+                if name in [u[0] for u in self.db.users_list()]:
                     self.db.create_contact(user, name)
                     response['status'] = 201
                 else:
@@ -202,8 +214,10 @@ def main():
     mw.statusBar().showMessage('Server is working')
 
     def update_list():
-        mw.load_clients(db)
-
+        try:
+            mw.load_clients(db)
+        except sqlalchemy.exc.PendingRollbackError:
+            db.session.rollback()
     update_list()
 
     timer = QTimer()
@@ -215,6 +229,7 @@ def main():
 
     server_app.exec_()
     stop_server = True
+
 
 if __name__ == '__main__':
     main()

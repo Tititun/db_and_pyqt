@@ -1,27 +1,38 @@
 import datetime
 import socket
+import sys
+from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtWidgets import QApplication
 from common.variables import MAX_LENGTH
 from common.utils import send_message, read_message
 import time
 import argparse
 import logging
-from decorators import log
 import threading
-from metaclasses import ClientVerifier
+from start_dialog import UserNameDialog
 from client_database import ClientStorage
 from log.client_log_config import client_logger
+from client_gui import ClientMainWindow
 
 logger = logging.getLogger('client_logger')
+stop_client = False
 
 
-class Client(metaclass=ClientVerifier):
-    def __init__(self, account_name):
-        self.db = ClientStorage(user=account_name)
+class Client(threading.Thread, QObject):
+    new_message = pyqtSignal(str)
+    connection_lost = pyqtSignal()
+
+    def __init__(self, account_name, db):
+        threading.Thread.__init__(self)
+        QObject.__init__(self)
+        self.db = db
         self.account_name = account_name
         self.status = 'online'
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listen_thread = None
         self.send_thread = None
+        self.all_users = []
+
 
     def create_presence(self):
         """функция для отправки presence сообщения на сервер"""
@@ -59,25 +70,33 @@ class Client(metaclass=ClientVerifier):
             if isinstance(content, list):
                 for name in content:
                     self.db.add_contact(name)
-            return msg['alert']
+            print(msg['alert'])
 
         elif msg.get('status') == 201:
-            return 'Запрос выполнен'
+            print('Запрос выполнен')
 
         elif msg.get('status') == 400:
-            return f'Ошибка запроса: {msg.get("alert", "что-то не то")}'
+            print(f'Ошибка запроса: {msg.get("alert", "что-то не то")}')
         from_ = msg.get('from', 'Чат-бот')
         message = msg.get('message')
-        self.db.write_message(from_, self.account_name, message, datetime.
-                              datetime.fromtimestamp(msg['time']))
-        return f'{from_}: {message}'
+        if from_ not in ['user_list', 'Чат-бот']:
+            return msg
+        elif from_ == 'user_list':
+            self.all_users = message if message else []
 
     def run(self):
+        global stop_client
         self.start_listening()
-        self.start_user_thread()
         while True:
             time.sleep(0.5)
-            if self.listen_thread.is_alive() and self.send_thread.is_alive():
+            if stop_client:
+                send_message(self.sock,
+                             {
+                                 'action': 'exit',
+                                 'time': time.time()}
+                             )
+                break
+            if self.listen_thread.is_alive():
                 continue
             break
 
@@ -91,76 +110,19 @@ class Client(metaclass=ClientVerifier):
                 data = self.sock.recv(MAX_LENGTH)
                 if msg := read_message(data):
                     chat_message = self.parse_message(msg)
-                    print(f'Сообщение в чате: {chat_message}')
+                    if chat_message:
+                        self.db.write_message(
+                            chat_message['from'],
+                            chat_message['to'],
+                            chat_message['message'],
+                            datetime.datetime.fromtimestamp(chat_message['time'])
+                        )
+                        print(f'Сообщение в чате: {chat_message}')
+                        self.new_message.emit(chat_message['from'])
 
         self.listen_thread = threading.Thread(target=receive_message)
         self.listen_thread.daemon = True
         self.listen_thread.start()
-
-    def start_user_thread(self):
-        def user_thread():
-            """
-            функция запрашивает у пользователя имя получателя и сообщение,
-            затем отправляет сообщение
-            """
-            print(f'Добро пожаловать в чат. Для выхода нажмите Ctrl + C')
-            while True:
-                action = {}
-                cmd = input('Команды:\n'
-                            '"msg" - отправить сообщение\n'
-                            '"add" - добавить контакт\n'
-                            '"del" - удалить контакт\n'
-                            '"list" - получить список контактов\n'
-                            '"exit" - выход\n')
-                print('COMMAND', cmd)
-                if cmd == 'msg':
-                    to = input('Введите получателя:\n')
-                    message_text = input('Введите текст сообщения:\n')
-                    action = {
-                        'action': 'message',
-                        'message': message_text,
-                        'to': to,
-                    }
-                    self.db.write_message(self.account_name, to,
-                                          message_text,
-                                          datetime.datetime.
-                                          fromtimestamp(time.time()))
-                elif cmd == 'add':
-                    name = input('Введите имя контакта для добавления:\n')
-                    action = {
-                        'action': 'add_contact',
-                        'user_id': name
-                    }
-                elif cmd == 'del':
-                    name = input('Введите имя контакта для удаления:\n')
-                    action = {
-                        'action': 'del_contact',
-                        'user_id': name
-                    }
-                elif cmd == 'list':
-                    action = {
-                        'action': 'get_contacts',
-                    }
-                    print(action)
-                elif cmd == 'exit':
-                    action = {'action': 'exit'}
-                message = {
-                    **action,
-                    'time': time.time(),
-                    'user': {
-                        'account_name': self.account_name,
-                        'status': 'online'
-                    }
-                }
-                print(message)
-                send_message(self.sock, message)
-                if action['action'] == 'exit':
-                    break
-
-        self.send_thread = threading.Thread(target=user_thread)
-        self.send_thread.daemon = True
-        self.send_thread.start()
-
 
 def main():
     """
@@ -172,24 +134,43 @@ def main():
                                      стандартное значние: Guest
 
     """
+    global stop_client
     parser = argparse.ArgumentParser(description='Скрипт для отправки presence'
                                                  ' сообщения и чтения ответа')
-    parser.add_argument('address', type=str, help='ip адрес сервера')
+    parser.add_argument('address', type=str, help='ip адрес сервера', nargs='?',
+                        default='127.0.0.1')
     parser.add_argument('port', type=int, help='порт сервера', nargs='?',
                         default=7777)
-    parser.add_argument('-u', '--user', type=str, help='имя пользователя',
-                        nargs='?', default='Guest')
     args = parser.parse_args()
 
     logger.debug('Скрипт запущен с запросом на соединение с сервером '
-                 f'{args.address}:{args.port} от пользователя {args.user}')
+                 f'{args.address}:{args.port}')
 
-    client = Client(args.user)
+    client_app = QApplication(sys.argv)
+    start_dialog = UserNameDialog()
+    client_app.exec_()
+
+    if start_dialog.ok_pressed:
+        client_name = start_dialog.client_name.text()
+        print(client_name)
+        del start_dialog
+    else:
+        exit(0)
+
+
+    db = ClientStorage(user=client_name)
+    client = Client(client_name, db)
     connection_success = client.connect(args.address, args.port)
     if connection_success:
         try:
             client.create_presence()
-            client.run()
+            client.start()
+            main_window = ClientMainWindow(db, client)
+            main_window.make_connection()
+            main_window.setWindowTitle(
+                f'Чат Программа alpha release - {client_name}')
+            client_app.exec_()
+            stop_client = True
         except:
             send_message(client.sock,
                          {
