@@ -14,5 +14,4 @@ def read_message(msg: bytes):
     try:
         return json.loads(msg.decode('utf-8'))
     except ValueError:
-        print(msg)
-        print('Сообщение не могло быть декодировано')
+        pass

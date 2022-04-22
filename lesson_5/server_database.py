@@ -3,7 +3,6 @@ from sqlalchemy import (create_engine, Column, Integer, String,
 from sqlalchemy.orm import sessionmaker, declarative_base
 import datetime
 import configparser
-from sqlalchemy import func
 
 Base = declarative_base()
 
@@ -65,7 +64,7 @@ class ServerStorage:
         Session = sessionmaker(bind=self.database_engine)
         self.session = Session()
         self.session.query(self.ActiveUser).delete()
-        self.session.query(self.ContactList).delete()
+        # self.session.query(self.ContactList).delete()
         self.session.commit()
 
     def user_login(self, username, ip_address, port):
@@ -133,8 +132,10 @@ class ServerStorage:
     def create_contact(self, owner, contact):
         owner_id = self.session.query(self.User.id)\
             .filter(self.User.name == owner).scalar()
+        print(owner_id)
         contact_id = self.session.query(self.User.id) \
             .filter(self.User.name == contact).scalar()
+        print(contact_id)
         new_contact = self.ContactList(owner_id=owner_id, contact_id=contact_id)
         self.session.add(new_contact)
         self.session.commit()
@@ -147,6 +148,7 @@ class ServerStorage:
         self.session.query(self.ContactList).\
             filter(self.ContactList.owner_id==owner_id,
                    self.ContactList.contact_id==contact_id).delete()
+        self.session.commit()
 
     def list_contacts(self, name):
         owner_id = self.session.query(self.User.id).filter(self.User.name == name).scalar()
@@ -169,7 +171,9 @@ if __name__ == '__main__':
     test_db = ServerStorage(db_file)
     test_db.user_login('Иван', '192.168.1.100', 10000)
     test_db.user_login('Марья', '192.168.1.101', 10001)
-    test_db.user_login('Дима', '192.168.1.100', 10000)
+    test_db.user_login('Дима', '192.168.1.102', 10000)
+    test_db.user_login('Таня', '192.168.1.103', 10000)
+    test_db.user_login('Коля', '192.168.1.104', 10000)
 
     print('Активные пользователи:')
     print(test_db.active_users_list(), end='\n\n')

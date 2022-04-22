@@ -1,5 +1,4 @@
-from sqlalchemy import (create_engine, Column, Integer, String,
-                        ForeignKey, DateTime, UniqueConstraint)
+from sqlalchemy import (create_engine, Column, Integer, String, DateTime, or_)
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 Base = declarative_base()
@@ -27,18 +26,22 @@ class ClientStorage:
 
     def __init__(self, user):
         database = f'sqlite:///client_{user}.db3'
+        self.user = user
         self.database_engine = create_engine(database,
                                              echo=False,
-                                             pool_recycle=60 * 60 * 2)
+                                             pool_recycle=60 * 60 * 2,
+                                             connect_args={
+                                                 "check_same_thread": False}
+                                             )
 
         self.metadata = Base.metadata
         self.metadata.create_all(self.database_engine)
 
         Session = sessionmaker(bind=self.database_engine)
         self.session = Session()
-        self.session.query(self.Contact).delete()
-        self.session.query(self.Message).delete()
-        self.session.commit()
+        # self.session.query(self.Contact).delete()
+        # self.session.query(self.Message).delete()
+        # self.session.commit()
 
     def add_contact(self, name):
         """записывает в базу новый контакт"""
@@ -49,6 +52,7 @@ class ClientStorage:
     def delete_contact(self, name):
         self.session.query(self.Contact).filter(self.Contact.name == name)\
             .delete()
+        self.session.commit()
 
     def list_contacts(self):
         return [c[0] for c in self.session.query(self.Contact.name)]
@@ -58,6 +62,14 @@ class ClientStorage:
                                    message=text, date_time=datetime_)
         self.session.add(new_message)
         self.session.commit()
+
+    def get_history(self, contact):
+        query = self.session.query(self.Message)\
+            .filter(or_(self.Message.from_user == contact,
+                         self.Message.to_user == contact))
+        return [(history_row.from_user, history_row.to_user,
+                 history_row.message, history_row.date_time)
+                for history_row in query.all()]
 
 
 if __name__ == '__main__':
