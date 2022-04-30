@@ -1,5 +1,5 @@
 from sqlalchemy import (create_engine, Column, Integer, String,
-                        ForeignKey, DateTime, UniqueConstraint)
+                        ForeignKey, DateTime, UniqueConstraint, Text)
 from sqlalchemy.orm import sessionmaker, declarative_base
 import datetime
 import configparser
@@ -16,6 +16,7 @@ class ServerStorage:
         id = Column('id', Integer, primary_key=True)
         name = Column('name', String, unique=True)
         last_login = Column('last_login', DateTime)
+        passwd_hash = Column('passwd_hash', String)
 
         def __repr__(self):
             return f'User: {self.name}'
@@ -65,6 +66,20 @@ class ServerStorage:
         self.session = Session()
         self.session.query(self.ActiveUser).delete()
         # self.session.query(self.ContactList).delete()
+        self.session.commit()
+
+    def add_user(self, name, passwd_hash):
+        user_row = self.User(name=name, passwd_hash=passwd_hash)
+        self.session.add(user_row)
+        self.session.commit()
+
+    def remove_user(self, name):
+        user = self.session.query(self.User).filter_by(name=name).first()
+        self.session.query(self.ActiveUser).filter_by(user=user.id).delete()
+        self.session.query(self.ContactList).filter_by(owner_id=user.id).delete()
+        self.session.query(self.ContactList).filter_by(contact_id=user.id).delete()
+        self.session.query(self.LoginHistory).filter_by(user=user.id).delete()
+        self.session.query(self.User).filter_by(name=name).delete()
         self.session.commit()
 
     def user_login(self, username, ip_address, port):
@@ -132,10 +147,8 @@ class ServerStorage:
     def create_contact(self, owner, contact):
         owner_id = self.session.query(self.User.id)\
             .filter(self.User.name == owner).scalar()
-        print(owner_id)
         contact_id = self.session.query(self.User.id) \
             .filter(self.User.name == contact).scalar()
-        print(contact_id)
         new_contact = self.ContactList(owner_id=owner_id, contact_id=contact_id)
         self.session.add(new_contact)
         self.session.commit()
@@ -162,6 +175,17 @@ class ServerStorage:
     def contacts_stats(self):
         return self.session.query(self.User.name, self.User.last_login).all()
 
+    def check_user(self, name):
+        """Метод проверяющий существование пользователя."""
+        if self.session.query(self.User).filter_by(name=name).count():
+            return True
+        else:
+            return False
+
+    def get_hash(self, name):
+        """Метод получения хэша пароля пользователя."""
+        user = self.session.query(self.User).filter_by(name=name).first()
+        return user.passwd_hash
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()
