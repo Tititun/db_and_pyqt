@@ -6,17 +6,17 @@ import socket
 import sys
 from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtWidgets import QApplication, QMessageBox
-from common.variables import MAX_LENGTH
-from common.utils import send_message, read_message
+from ..common.variables import MAX_LENGTH
+from ..common.utils import send_message, read_message
 import time
 import argparse
 import logging
 import threading
-from start_dialog import UserNameDialog
+from ..start_dialog import UserNameDialog
 from client_database import ClientStorage
-from log.client_log_config import client_logger
+from ..log.client_log_config import client_logger
 from client_gui import ClientMainWindow
-from common.variables import MAX_LENGTH, ENCODING
+from ..common.variables import MAX_LENGTH, ENCODING
 import json
 
 logger = logging.getLogger('client_logger')

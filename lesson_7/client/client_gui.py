@@ -5,7 +5,7 @@ from PyQt5.QtCore import pyqtSlot, QEvent, Qt
 import logging
 import datetime
 from main_window_conv import Ui_MainClientWindow
-from common.utils import send_message
+from ..common.utils import send_message
 import time
 
 

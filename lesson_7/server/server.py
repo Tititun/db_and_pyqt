@@ -10,15 +10,15 @@ import threading
 import time
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication
-from common.utils import send_message, read_message
-from common.variables import MAX_LENGTH
+from ..common.utils import send_message, read_message
+from ..common.variables import MAX_LENGTH
 import logging
-from decorators import log
-from metaclasses import ServerVerifier
-from descriptors import Port
+from ..decorators import log
+from ..metaclasses import ServerVerifier
+from ..descriptors import Port
 from server_database import ServerStorage
 import configparser
-from log.server_log_config import server_logger
+from ..log.server_log_config import server_logger
 from server_gui import MainWindow
 import sqlalchemy
 
