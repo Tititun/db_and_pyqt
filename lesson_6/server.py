@@ -1,3 +1,6 @@
+import binascii
+import hmac
+import os
 import select
 import socket
 import re
@@ -32,6 +35,7 @@ class Server(threading.Thread, metaclass=ServerVerifier):
         self.clients = []
         self.messages = []
         self.users = {}
+        self.waiting = {}  # users waiting for authorization
 
         self.socket = self.init_socket()
         self.db = db
@@ -119,12 +123,42 @@ class Server(threading.Thread, metaclass=ServerVerifier):
             action = message.get('action')
             user = message.get('user', {}).get('account_name', 'Guest')
             if action == 'presence':
-                response['message'] = \
-                    f'Пользователь {user} присоединился к чату'
-                self.users[user] = socket_
-                client_ip, client_port = socket_.getpeername()
-                self.db.user_login(user, client_ip, client_port)
-                response['status'] = 200
+                if user in self.users:
+                    # пользователь уже авторизован
+                    response['status'] = 400
+                    response['error'] = 'Пользователь уже авторизован'
+                    send_message(socket_, response)
+                    self.clients.remove(socket_)
+                    return
+                elif user not in [u[0] for u in self.db.users_list()]:
+                    response['status'] = 400
+                    response['error'] = 'Такого пользователя не существует'
+                    send_message(socket_, response)
+                    self.clients.remove(socket_)
+                    return
+                else:
+                    response['status'] = 511
+                    random_str = binascii.hexlify(os.urandom(64))
+                    response['data'] = random_str.decode('ascii')
+                    hash = hmac.new(self.db.get_hash(user), random_str, 'MD5')
+                    digest = hash.digest()
+                    self.waiting[user] = digest
+                    send_message(socket_, response)
+                    return
+            elif action == 'presence_2':
+                client_digest = binascii.a2b_base64(message['data'])
+                server_digest = self.waiting.get(user)
+                if server_digest and\
+                        hmac.compare_digest(client_digest, server_digest):
+                    self.users[user] = socket_
+                    client_ip, client_port = socket_.getpeername()
+                    self.db.user_login(user, client_ip, client_port)
+                    response['status'] = 200
+                else:
+                    response['status'] = 400
+                    response['error'] = 'Неправильный пароль'
+                if user in self.waiting:
+                    del self.waiting[user]
             elif action == 'message':
                 response['from'] = user
                 response['message'] = message.get('message')
@@ -137,7 +171,6 @@ class Server(threading.Thread, metaclass=ServerVerifier):
             elif action == 'add_contact':
                 name = message.get('user_id')
                 response['to'] = user
-                print([u[0] for u in self.db.users_list()])
                 if name in [u[0] for u in self.db.users_list()]:
                     self.db.create_contact(user, name)
                     response['status'] = 201
@@ -226,6 +259,8 @@ def main():
 
     mw.show_history_button.triggered.connect(lambda: mw.show_statistics(db))
     mw.config_btn.triggered.connect(lambda: mw.show_config_window(config))
+    mw.register_btn.triggered.connect(lambda: mw.reg_user(db, server))
+    mw.remove_btn.triggered.connect(lambda: mw.rem_user(db, server))
 
     server_app.exec_()
     stop_server = True

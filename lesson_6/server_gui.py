@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QLabel, \
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import Qt
 from typing import Dict
+from add_user import RegisterUser
+from remove_user import DelUserDialog
 
 
 class MainWindow(QMainWindow):
@@ -17,6 +19,9 @@ class MainWindow(QMainWindow):
 
         self.show_history_button = QAction('История клиентов', self)
         self.config_btn = QAction('Настройки сервера', self)
+        self.register_btn = QAction('Регистрация пользователя', self)
+
+        self.remove_btn = QAction('Удаление пользователя', self)
 
         self.statusBar()
 
@@ -24,6 +29,8 @@ class MainWindow(QMainWindow):
         self.toolbar.addAction(self.exitAction)
         self.toolbar.addAction(self.show_history_button)
         self.toolbar.addAction(self.config_btn)
+        self.toolbar.addAction(self.register_btn)
+        self.toolbar.addAction(self.remove_btn)
 
         self.setFixedSize(800, 600)
         self.setWindowTitle('Сервер')
@@ -36,6 +43,8 @@ class MainWindow(QMainWindow):
         self.active_clients_table.move(10, 55)
         self.active_clients_table.setFixedSize(780, 400)
 
+        self.reg_window = None
+        self.rem_window = None
         self.show()
 
     def load_clients(self, database):
@@ -171,3 +180,10 @@ class MainWindow(QMainWindow):
                 message.warning(cw, 'Ошибка',
                                 'Порт должен быть от 1024 до 65536')
 
+    def reg_user(self, db, thread):
+        self.reg_window = RegisterUser(db, thread)
+        self.reg_window.show()
+
+    def rem_user(self, db, thread):
+        self.rem_window = DelUserDialog(db, thread)
+        self.rem_window.show()

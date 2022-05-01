@@ -1,8 +1,11 @@
+import binascii
 import datetime
+import hashlib
+import hmac
 import socket
 import sys
 from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 from common.variables import MAX_LENGTH
 from common.utils import send_message, read_message
 import time
@@ -13,6 +16,8 @@ from start_dialog import UserNameDialog
 from client_database import ClientStorage
 from log.client_log_config import client_logger
 from client_gui import ClientMainWindow
+from common.variables import MAX_LENGTH, ENCODING
+import json
 
 logger = logging.getLogger('client_logger')
 stop_client = False
@@ -34,7 +39,7 @@ class Client(threading.Thread, QObject):
         self.all_users = []
 
 
-    def create_presence(self):
+    def create_presence(self, data=None):
         """функция для отправки presence сообщения на сервер"""
         msg = {
             'action': 'presence',
@@ -44,6 +49,9 @@ class Client(threading.Thread, QObject):
                 'status': self.status
             }
         }
+        if data:
+            msg['action'] = 'presence_2'
+            msg['data'] = data
         send_message(self.sock, msg)
 
     def connect(self, addr, port):
@@ -152,7 +160,7 @@ def main():
 
     if start_dialog.ok_pressed:
         client_name = start_dialog.client_name.text()
-        print(client_name)
+        client_passwd = start_dialog.client_passwd.text()
         del start_dialog
     else:
         exit(0)
@@ -161,9 +169,46 @@ def main():
     db = ClientStorage(user=client_name)
     client = Client(client_name, db)
     connection_success = client.connect(args.address, args.port)
+    success = False
     if connection_success:
         try:
+            client.sock.settimeout(5)
             client.create_presence()
+            passwd_bytes = client_passwd.encode('utf-8')
+            salt = client_name.lower().encode('utf-8')
+            passwd_hash = hashlib.pbkdf2_hmac('sha512', passwd_bytes, salt,
+                                              10000)
+            passwd_hash_string = binascii.hexlify(passwd_hash)
+            logger.debug(f'Passwd hash ready: {passwd_hash_string}')
+            encoded_response = client.sock.recv(MAX_LENGTH)
+            json_response = encoded_response.decode(ENCODING)
+            response = json.loads(json_response)
+            if response['status'] == 400:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Information)
+                msgBox.setText(response['error'])
+                msgBox.exec_()
+            elif response['status'] == 511:
+                data = response['data']
+                hash = hmac.new(passwd_hash_string, data.encode('utf-8'), 'MD5')
+                digest = hash.digest()
+                client.create_presence(
+                    data=binascii.b2a_base64(digest).decode('ascii'))
+
+            encoded_response = client.sock.recv(MAX_LENGTH)
+            json_response = encoded_response.decode(ENCODING)
+            response = json.loads(json_response)
+
+            if response['status'] == 200:
+                success = True
+            elif response['staus'] == 400:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Information)
+                msgBox.setText(response['error'])
+                msgBox.exec_()
+            if not success:
+                exit(0)
+
             client.start()
             main_window = ClientMainWindow(db, client)
             main_window.make_connection()
