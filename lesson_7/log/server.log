@@ -1,0 +1,260 @@
+2022-04-30 07:46:40,219 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:46:40,364 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 07:48:41,829 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:48:41,932 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 07:57:43,459 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:57:43,563 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 07:58:36,645 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:58:36,749 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 07:59:12,982 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:59:13,086 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 07:59:49,446 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 07:59:49,572 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:00:44,269 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:00:44,373 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:01:06,712 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:01:06,816 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:01:20,302 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:01:20,407 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:48:00,310 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:48:00,422 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:48:34,954 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:48:35,073 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:48:52,960 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:48:53,063 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:49:06,962 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:49:07,068 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 08:49:25,361 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 08:49:25,467 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 13:40:24,753 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 13:40:24,860 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 13:44:59,034 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 13:44:59,173 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 13:58:26,079 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 13:58:26,200 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 13:58:54,067 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 13:58:54,173 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:00:18,806 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:00:18,916 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:02:13,329 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:02:13,438 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:03:13,500 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:03:13,604 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:04:18,426 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:04:18,554 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:05:52,422 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:05:52,529 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:06:36,313 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:06:36,430 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:07:35,953 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:07:36,059 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:08:48,757 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:08:48,862 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:10:14,760 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:10:14,865 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:16:13,899 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:16:14,005 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:52:10,960 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 14:52:11,067 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 14:52:20,223 INFO     server Получен запрос на соединение от ('127.0.0.1', 33644)
+2022-04-30 14:52:20,224 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33644)>
+2022-04-30 14:54:06,219 INFO     server Получен запрос на соединение от ('127.0.0.1', 33646)
+2022-04-30 14:54:06,219 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33646)>
+2022-04-30 14:55:04,499 INFO     server Получен запрос на соединение от ('127.0.0.1', 33648)
+2022-04-30 14:55:04,499 INFO     server Установлено соединение с <socket.socket fd=23, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33648)>
+2022-04-30 14:55:25,520 INFO     server Получен запрос на соединение от ('127.0.0.1', 33650)
+2022-04-30 14:55:25,520 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33650)>
+2022-04-30 14:56:08,414 INFO     server Получен запрос на соединение от ('127.0.0.1', 33652)
+2022-04-30 14:56:08,414 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33652)>
+2022-04-30 15:14:09,621 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:14:09,726 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:14:19,945 INFO     server Получен запрос на соединение от ('127.0.0.1', 33654)
+2022-04-30 15:14:19,945 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33654)>
+2022-04-30 15:17:31,367 INFO     server Получен запрос на соединение от ('127.0.0.1', 33656)
+2022-04-30 15:17:31,368 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33656)>
+2022-04-30 15:18:02,413 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:18:02,521 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:18:18,366 INFO     server Получен запрос на соединение от ('127.0.0.1', 33658)
+2022-04-30 15:18:18,367 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33658)>
+2022-04-30 15:20:30,989 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:20:31,094 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:20:36,742 INFO     server Получен запрос на соединение от ('127.0.0.1', 33662)
+2022-04-30 15:20:36,742 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33662)>
+2022-04-30 15:24:01,027 INFO     server Получен запрос на соединение от ('127.0.0.1', 33664)
+2022-04-30 15:24:01,027 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33664)>
+2022-04-30 15:25:07,452 INFO     server Получен запрос на соединение от ('127.0.0.1', 33666)
+2022-04-30 15:25:07,453 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33666)>
+2022-04-30 15:26:34,314 INFO     server Получен запрос на соединение от ('127.0.0.1', 33668)
+2022-04-30 15:26:34,314 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33668)>
+2022-04-30 15:26:59,125 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:26:59,235 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:27:05,827 INFO     server Получен запрос на соединение от ('127.0.0.1', 33670)
+2022-04-30 15:27:05,828 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33670)>
+2022-04-30 15:27:40,698 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:27:40,804 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:27:46,994 INFO     server Получен запрос на соединение от ('127.0.0.1', 33672)
+2022-04-30 15:27:46,994 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33672)>
+2022-04-30 15:28:27,411 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:28:27,530 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:28:32,597 INFO     server Получен запрос на соединение от ('127.0.0.1', 33674)
+2022-04-30 15:28:32,597 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33674)>
+2022-04-30 15:37:09,768 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:09,874 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:13,015 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:13,119 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:13,988 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:14,111 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:14,897 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:15,003 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:15,759 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:15,863 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:16,594 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:16,700 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:17,427 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:17,533 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:18,404 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:18,512 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:28,965 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:29,070 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:30,098 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:30,202 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:30,988 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:31,111 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:31,834 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:31,962 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:37:32,673 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:37:32,799 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:38:06,032 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:38:06,137 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:38:13,247 INFO     server Получен запрос на соединение от ('127.0.0.1', 33678)
+2022-04-30 15:38:13,247 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33678)>
+2022-04-30 15:38:46,960 INFO     server Получен запрос на соединение от ('127.0.0.1', 33680)
+2022-04-30 15:38:46,960 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33680)>
+2022-04-30 15:39:04,266 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:39:04,372 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:40:05,954 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:40:06,060 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:40:12,448 INFO     server Получен запрос на соединение от ('127.0.0.1', 33682)
+2022-04-30 15:40:12,449 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33682)>
+2022-04-30 15:46:42,125 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 15:46:42,252 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 15:46:47,267 INFO     server Получен запрос на соединение от ('127.0.0.1', 33684)
+2022-04-30 15:46:47,268 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33684)>
+2022-04-30 16:06:49,870 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:06:49,976 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:07:19,224 INFO     server Получен запрос на соединение от ('127.0.0.1', 33686)
+2022-04-30 16:07:19,224 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33686)>
+2022-04-30 16:10:01,070 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:10:01,177 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:10:41,457 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:10:41,566 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:11:31,759 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:11:31,864 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:11:37,783 INFO     server Получен запрос на соединение от ('127.0.0.1', 33688)
+2022-04-30 16:11:37,784 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33688)>
+2022-04-30 16:12:40,986 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:12:41,117 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:12:47,624 INFO     server Получен запрос на соединение от ('127.0.0.1', 33690)
+2022-04-30 16:12:47,624 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33690)>
+2022-04-30 16:13:25,452 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:13:25,562 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:13:33,533 INFO     server Получен запрос на соединение от ('127.0.0.1', 33692)
+2022-04-30 16:13:33,533 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33692)>
+2022-04-30 16:14:40,340 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:14:40,444 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:14:48,904 INFO     server Получен запрос на соединение от ('127.0.0.1', 33694)
+2022-04-30 16:14:48,904 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33694)>
+2022-04-30 16:18:59,361 INFO     server Получен запрос на соединение от ('127.0.0.1', 33698)
+2022-04-30 16:18:59,362 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33698)>
+2022-04-30 16:19:15,374 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:19:15,487 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:19:27,414 INFO     server Получен запрос на соединение от ('127.0.0.1', 33700)
+2022-04-30 16:19:27,414 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33700)>
+2022-04-30 16:20:32,921 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:20:33,028 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:20:46,950 INFO     server Получен запрос на соединение от ('127.0.0.1', 33702)
+2022-04-30 16:20:46,950 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33702)>
+2022-04-30 16:24:02,701 INFO     server Получен запрос на соединение от ('127.0.0.1', 33704)
+2022-04-30 16:24:02,702 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33704)>
+2022-04-30 16:24:54,999 INFO     server Получен запрос на соединение от ('127.0.0.1', 33706)
+2022-04-30 16:24:55,000 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33706)>
+2022-04-30 16:25:19,606 INFO     server Получен запрос на соединение от ('127.0.0.1', 33708)
+2022-04-30 16:25:19,606 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33708)>
+2022-04-30 16:26:04,280 INFO     server Получен запрос на соединение от ('127.0.0.1', 33710)
+2022-04-30 16:26:04,280 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33710)>
+2022-04-30 16:28:47,769 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:28:47,880 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:28:54,401 INFO     server Получен запрос на соединение от ('127.0.0.1', 33712)
+2022-04-30 16:28:54,401 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33712)>
+2022-04-30 16:31:50,924 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:31:51,053 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:31:59,660 INFO     server Получен запрос на соединение от ('127.0.0.1', 33714)
+2022-04-30 16:31:59,661 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33714)>
+2022-04-30 16:32:17,372 INFO     server Получен запрос на соединение от ('127.0.0.1', 33716)
+2022-04-30 16:32:17,372 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33716)>
+2022-04-30 16:34:23,086 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:34:23,198 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:34:31,141 INFO     server Получен запрос на соединение от ('127.0.0.1', 33718)
+2022-04-30 16:34:31,141 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33718)>
+2022-04-30 16:34:43,794 INFO     server Получен запрос на соединение от ('127.0.0.1', 33720)
+2022-04-30 16:34:43,794 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33720)>
+2022-04-30 16:35:05,855 INFO     server Получен запрос на соединение от ('127.0.0.1', 33722)
+2022-04-30 16:35:05,856 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33722)>
+2022-04-30 16:37:04,435 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:37:04,541 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:37:14,086 INFO     server Получен запрос на соединение от ('127.0.0.1', 33724)
+2022-04-30 16:37:14,086 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33724)>
+2022-04-30 16:42:05,393 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:42:05,530 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:42:12,275 INFO     server Получен запрос на соединение от ('127.0.0.1', 33726)
+2022-04-30 16:42:12,275 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33726)>
+2022-04-30 16:42:13,329 INFO     server Получен запрос на соединение от ('127.0.0.1', 33728)
+2022-04-30 16:42:13,330 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33728)>
+2022-04-30 16:43:25,750 INFO     server Получен запрос на соединение от ('127.0.0.1', 33730)
+2022-04-30 16:43:25,750 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33730)>
+2022-04-30 16:43:39,698 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:43:39,807 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:43:45,774 INFO     server Получен запрос на соединение от ('127.0.0.1', 33732)
+2022-04-30 16:43:45,775 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33732)>
+2022-04-30 16:43:46,826 INFO     server Получен запрос на соединение от ('127.0.0.1', 33734)
+2022-04-30 16:43:46,826 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33734)>
+2022-04-30 16:44:25,437 INFO     server Получен запрос на соединение от ('127.0.0.1', 33736)
+2022-04-30 16:44:25,437 INFO     server Установлено соединение с <socket.socket fd=23, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33736)>
+2022-04-30 16:44:26,450 INFO     server Получен запрос на соединение от ('127.0.0.1', 33738)
+2022-04-30 16:44:26,450 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33738)>
+2022-04-30 16:45:49,239 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:45:49,363 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:46:02,082 INFO     server Получен запрос на соединение от ('127.0.0.1', 33740)
+2022-04-30 16:46:02,082 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33740)>
+2022-04-30 16:46:03,140 INFO     server Получен запрос на соединение от ('127.0.0.1', 33742)
+2022-04-30 16:46:03,140 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33742)>
+2022-04-30 16:49:35,403 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:49:35,515 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:58:24,221 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 16:58:24,324 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 16:58:29,612 INFO     server Получен запрос на соединение от ('127.0.0.1', 33744)
+2022-04-30 16:58:29,613 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33744)>
+2022-04-30 16:58:30,666 INFO     server Получен запрос на соединение от ('127.0.0.1', 33746)
+2022-04-30 16:58:30,666 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33746)>
+2022-04-30 17:00:59,420 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 17:00:59,533 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 17:01:05,790 INFO     server Получен запрос на соединение от ('127.0.0.1', 33748)
+2022-04-30 17:01:05,790 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33748)>
+2022-04-30 17:01:06,847 INFO     server Получен запрос на соединение от ('127.0.0.1', 33750)
+2022-04-30 17:01:06,847 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33750)>
+2022-04-30 17:02:28,783 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 17:02:28,889 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 17:02:36,596 INFO     server Получен запрос на соединение от ('127.0.0.1', 33752)
+2022-04-30 17:02:36,597 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33752)>
+2022-04-30 17:02:50,348 INFO     server Получен запрос на соединение от ('127.0.0.1', 33754)
+2022-04-30 17:02:50,348 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33754)>
+2022-04-30 17:04:11,067 DEBUG    decorators check_ip_port вызвана из функции main с аргументами ('127.0.0.1', 7777), {}. Результат: True
+2022-04-30 17:04:11,173 DEBUG    server Сервер запущен с параметрами: ip - 127.0.0.1 port - 7777
+2022-04-30 17:04:19,931 INFO     server Получен запрос на соединение от ('127.0.0.1', 33756)
+2022-04-30 17:04:19,931 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33756)>
+2022-04-30 17:04:32,413 INFO     server Получен запрос на соединение от ('127.0.0.1', 33758)
+2022-04-30 17:04:32,414 INFO     server Установлено соединение с <socket.socket fd=22, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33758)>
+2022-04-30 17:06:24,972 INFO     server Получен запрос на соединение от ('127.0.0.1', 33760)
+2022-04-30 17:06:24,972 INFO     server Установлено соединение с <socket.socket fd=23, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33760)>
+2022-04-30 17:06:35,700 INFO     server Получен запрос на соединение от ('127.0.0.1', 33762)
+2022-04-30 17:06:35,700 INFO     server Установлено соединение с <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 33762)>
